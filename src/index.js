@@ -1,9 +1,22 @@
-const app = require('express')();
+const express = require('express');
+const cors = require('cors');
+const app = express();
 
-app.get('/', (req,res) => {
+
+app.use(cors({
+    origin: '*',
+}));
+
+app.set('view engine', 'ejs');
+
+let counter = 0;
+
+app.get('/', cors(), (req,res) => {
     // console.log(req);
-    res.json({ message : 'Docker is easy.'})
+    counter = counter + 1;
+    res.json({"message": `Loving the node.js + react.js project... ${counter} times.`});
 })
 
 const port = process.env.PORT || 8080;
+
 app.listen(port, () => console.log(`app listening on port:${port}`));
