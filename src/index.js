@@ -14,6 +14,11 @@ let counter = 0;
 app.get('/', cors(), (req,res) => {
     // console.log(req);
     counter = counter + 1;
+    res.json({"message": `Server accessed ${counter} times....`});
+})
+
+app.get('/count', cors(), (req,res) => {
+    // console.log(req);
     res.json({"message": `Loving the node.js + react.js project... ${counter} times.`});
 })
 
