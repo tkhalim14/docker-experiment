@@ -8,7 +8,17 @@ const App = () => {
   const [text,setText] = useState('');
 
   useEffect(() => {
-    fetch("http://localhost:8080/")
+    let interval = setInterval(async () => {
+      await fetchfromApi();
+    }, 20000);
+    
+    return () => {
+      clearInterval(interval);
+    };
+  },[]);
+  
+  const fetchfromApi = async () => {
+    await fetch("http://localhost:5000/counter")
     .then((res)=>{
       if (res.status !== 200) {
         throw new Error(`Failed to fetch data. Status: ${res.status}`);
@@ -17,13 +27,12 @@ const App = () => {
     })
     .then(data => {
       setText(data);
-      console.log(data);
+      // console.log(data);
     })
     .catch((err) => {
       console.error(err);
     });
-  },[]);
-  
+  }
 
   return (
     <div className="App">
