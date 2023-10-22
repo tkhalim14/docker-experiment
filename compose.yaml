@@ -1,0 +1,13 @@
+services:
+  src:
+    build:
+      context: ./src
+      dockerfile: Dockerfile.server
+    ports:
+      - "5000:8080"
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.client
+    ports:
+      - "3000:3000"
