@@ -8,17 +8,19 @@ const App = () => {
   const [text,setText] = useState('');
 
   useEffect(() => {
+    fetchfromApi("http://localhost:5000");
+    
     let interval = setInterval(async () => {
-      await fetchfromApi();
-    }, 20000);
+      await fetchfromApi("http://localhost:5000/count");
+    }, 1000);
     
     return () => {
       clearInterval(interval);
     };
   },[]);
   
-  const fetchfromApi = async () => {
-    await fetch("http://localhost:5000/counter")
+  const fetchfromApi = async (url) => {
+    await fetch(url)
     .then((res)=>{
       if (res.status !== 200) {
         throw new Error(`Failed to fetch data. Status: ${res.status}`);
